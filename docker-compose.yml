@@ -1,0 +1,41 @@
+version: "2"
+services:
+
+    service-symfony-redis:
+      image: redis:alpine
+      container_name:  service-symfony-redis
+
+    service-symfony-web:
+      depends_on: ["service-symfony-app"]
+      image: wrkngu0/caddy:0.11.1
+      container_name:  service-symfony-webserver
+      #links: 
+      #  - me-app:app
+      expose:
+        - 8080
+      environment:
+        - VIRTUAL_HOST=service-symfony.loc
+      volumes:
+        - .:/var/www/application/
+        - ./docker/dev.Caddyfile:/etc/caddy/Caddyfile
+
+    service-symfony-app:
+      build: 
+        context: ./
+        dockerfile: app.Dockerfile
+        args:
+          APP_STAGE: dev
+      env_file:
+        - .env
+      container_name: service-symfony-app
+      cap_add:
+        - SYS_PTRACE
+      working_dir: /var/www/application
+      volumes:
+        - .:/var/www/application/
+        - ./docker/dev.99-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
+
+networks:
+  default:
+    external:
+      name: citrus_net

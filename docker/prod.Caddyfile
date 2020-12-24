@@ -1,0 +1,20 @@
+ :8080 {
+    tls off
+    log /dev/null
+    errors stdout
+
+    root /var/www/application/public/
+
+    rewrite {
+        if {path} not /status
+        to {path} /index.php?{query}
+    }
+
+    fastcgi /status localhost:9000 {
+        env SCRIPT_NAME /status
+    }
+
+    fastcgi / localhost:9000 php {
+        index index.php
+    }
+}
