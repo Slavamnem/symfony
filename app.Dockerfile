@@ -1,4 +1,4 @@
-FROM php:7.3-fpm
+FROM php:7.4-fpm
 
 MAINTAINER Author="Aleksej Burdash <working.unit.0@gmail.com>"
 
