@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -6,7 +6,9 @@ use App\Repository\StudentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=StudentRepository::class)
+ * @ORM\Table(name="symfony_student")
+ * @ORM\Entity(repositoryClass="App\Repository\StudentRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Student
 {
