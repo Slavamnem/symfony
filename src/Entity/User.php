@@ -1,9 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Entity;
 
-use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Table(name="symfony_user")
@@ -50,6 +52,11 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password = '';
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private string $accessToken;
 
     /**
      * @return mixed
@@ -113,6 +120,18 @@ class User implements UserInterface
     public function setPhone($phone): void
     {
         $this->phone = $phone;
+    }
+
+    public function getAccessToken(): string
+    {
+        return $this->accessToken;
+    }
+
+    public function setAccessToken(string $accessToken): User
+    {
+        $this->accessToken = $accessToken;
+
+        return $this;
     }
 
     public function setRoles(array $roles): void

@@ -6,6 +6,7 @@ namespace App\Service;
 
 use App\Entity\User;
 use Symfony\Component\Security\Core\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class UserService
 {
@@ -28,9 +29,9 @@ class UserService
         $user = $this->security->getUser();
 
         return [
-            'id' => $user->getId(),
-            'login' => $user->getLogin(),
-            'phone' => $user->getPhone(),
+//            'id' => $user->getId(),
+            'login' => $user->getUsername(),
+//            'phone' => $user->getPhone(),
         ];
     }
 }
