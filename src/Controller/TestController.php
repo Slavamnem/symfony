@@ -19,6 +19,8 @@ class TestController extends AbstractController
 {
     /**
      * @Route("/", name="list")
+     *
+     * @IsGranted({"ROLE_USER"})
      */
     public function index(): Response
     {
@@ -31,7 +33,7 @@ class TestController extends AbstractController
     public function profile(UserService $userService): Response
     {
 //        dd($this->getUser());
-        dd($userService->getProfile());
+//        dd($userService->getProfile());
 
         return $this->render('base.html.twig', ['count' => 5]);
     }

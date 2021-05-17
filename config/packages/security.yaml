@@ -51,12 +51,24 @@ security:
             stateless: true
             http_basic: ~
 
+        api_login:
+            pattern: ^/api/auth/login
+            stateless: true
+            anonymous: true
+            json_login:
+                provider: app_user_provider
+                check_path: /api/auth/login
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+            provider: app_user_provider
+
         api:
             pattern: ^/(api)
-            provider: api_app_user_provider
+            provider: app_user_provider
             guard:
                 authenticators:
-                    - App\Security\TokenAuthenticator
+                    #                    - App\Security\TokenAuthenticator
+                    - lexik_jwt_authentication.jwt_token_authenticator
             anonymous: false
             stateless: true
             http_basic: ~
@@ -70,6 +82,7 @@ security:
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/test, roles: ROLE_USER }
+        - { path: ^/api/auth/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 #        - { path: ^/base/first, roles: ROLE_SUPERADMIN }
         # - { path: ^/admin, roles: ROLE_ADMIN } # плюс действует на все подкаталоги
         # - { path: ^/profile, roles: ROLE_USER }
