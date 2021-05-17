@@ -62,6 +62,11 @@ security:
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
             provider: app_user_provider
 
+        api_refresh:
+            pattern: ^/api/auth/refresh
+            stateless: true
+            anonymous: true
+
         api:
             pattern: ^/(api)
             provider: app_user_provider
@@ -83,6 +88,7 @@ security:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/test, roles: ROLE_USER }
         - { path: ^/api/auth/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/auth/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 #        - { path: ^/base/first, roles: ROLE_SUPERADMIN }
         # - { path: ^/admin, roles: ROLE_ADMIN } # плюс действует на все подкаталоги
         # - { path: ^/profile, roles: ROLE_USER }

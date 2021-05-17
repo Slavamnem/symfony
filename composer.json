@@ -10,6 +10,7 @@
         "doctrine/doctrine-migrations-bundle": "2.1.*",
         "enqueue/enqueue-bundle": "^0.10.1",
         "enqueue/sqs": "^0.10.1",
+        "gesdinet/jwt-refresh-token-bundle": "^0.12.0",
         "jms/serializer-bundle": "^3.5",
         "lexik/jwt-authentication-bundle": "^2.11",
         "sensio/framework-extra-bundle": "^5.1",
